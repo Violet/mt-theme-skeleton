@@ -169,10 +169,6 @@ template_sets:
                             build_type: 4
                             preferred: 0
             module:
-                comments:
-                    label: Comments
-                comment_form:
-                    label: Comment Form
                 entry_details:
                     label: Entry Details
                 footer:
@@ -190,10 +186,6 @@ template_sets:
                     cache:
                         expire_type: 1
                         expire_interval: 30
-                sidebar:
-                    label: Sidebar
-                title:
-                    label: Title
             system:
                 comment_response:
                     label: Comment Response
@@ -204,11 +196,6 @@ template_sets:
                 popup_image:
                     label: Popup Image
             widget:
-                author_archives:
-                    label: 'Author Archives'
-                    cache:
-                        expire_type: 2
-                        expire_event: author
                 calendar:
                     label: Calendar
                     cache:
