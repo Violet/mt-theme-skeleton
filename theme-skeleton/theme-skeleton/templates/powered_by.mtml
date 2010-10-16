@@ -1,0 +1,15 @@
+<div class="widget">
+<mt:If tag="ProductName" like="/Movable Type/">
+	<$mt:var name="url" value="http://www.movabletype.org"$>
+	<mt:setvarblock name="image"><$mt:StaticWebPath$>images/mt4-bug-pbmt-white.png</mt:setvarblock>
+	<$mt:var name="imgh" value="75"$>
+	<$mt:var name="imgw" value="120"$>
+<mt:Else>
+	<$mt:var name="url" value="http://openmelody.org"$>
+	<mt:setvarblock name="image"><$mt:StaticWebPath$>melody/melody-logo-white-318x121.png</mt:setvarblock>
+        <$mt:var name="imgh" value="46"$>
+        <$mt:var name="imgw" value="120"$>
+</mt:If>
+<a href="<$mt:var name="url"$>"><img src="<$mt:var name="image"$>" alt="Powered by <$mt:ProductName$> <$mt:Version$>" style="height:<$mt:var name="imgh"$>px;width:<$mt:var name="imgw"$>px" /></a>
+<div class="clear"></div>
+</div>

@@ -1,0 +1,348 @@
+name: ShineTheme
+id: ShineTheme
+key: ShineTheme
+author_link: http://www.codemonkeyramblings.com
+author_name: Mike Thomsen, based on Shine.
+description: This plugin provides a Movable Type/Melody version of Shine.
+version: 1.0
+static_version: 1
+plugin_link: http://www.codemonkeyramblings.com
+
+template_sets:
+    Shine_theme:
+        label: 'Shine'
+        base_path: 'templates'
+        description: 'Shine converted from WordPress'
+        author_name: 'Mike Thomsen, based on work by Creamy (http://themes.creamy.co.uk/)'
+        author_link: 'http://www.codemonkeyramblings.com/'
+        blog_preferences: 'Shine_theme_preferences'
+        thumbnail: 'shine-small.png'
+        preview: 'shine-large.png'
+        options:
+            google_cse:
+                label: Google Custom Search Engine
+                default: ''
+                hint: Find name="cx" in the Search box code of Google Custom Search Engine, and type the value here. For example: 014782006753236413342:1ltfrybsbz4
+                tag: ShineGoogleCSE
+                type: text
+            footer_tracking_code:
+                label: Web Analytics
+                default: ''
+                hint: Add web analytics code to your site. (e.g. Google Analytics, Yahoo! Web Analytics, ...)
+                tag: ShineWebAnalytics
+                type: textarea
+            primary_author:
+                label: 'Primary Author'
+                hint: "Enter the username of the primary author to display <em>only</em> this users Action Stream profiles in the Other Profiles widget. (By default all author's profiles are displayed.)"
+                tag: ShinePrimaryAuthor
+                type: text
+            number_of_entries_on_main_index:
+                label: Number of entries on the main page
+                hint: This is the number of entries that will be displayed on the main page.
+                tag: ShineEntriesOnMainPage
+                type: text
+                default: 20
+            number_of_entries_on_listings:
+                label: Number of entries on the listing pages
+                hint: This is the number of entries that will be displayed on the listing pages (Category, Monthly, Author, etc).
+                tag: ShineEntriesOnListingPages
+                type: text
+                default: 20
+            number_of_entries_in_feeds:
+                label: Number of entires in RSS/Atom feeds
+                hint: This will limit the number of entries that are put into your news feeds.
+                tag: ShineEntriesInFeeds
+                type: text
+                default: 20
+            number_of_comments_in_comment_feed:
+                label: Number of comments in comment feed
+                hint: This will limit the number of comments that are put into the recent comment news feed
+                tag: ShineCommentsInFeed
+                type: text
+                default: 25
+            comment_pagination:
+                label: 'Paginate comments'
+                hint: 'Paginating comments will break up comment listings into groups of a user-defined size.'
+                tag: ShinePaginateComments
+                type: radio
+                values: Yes,No
+                default: No
+            comment_pagination_count:
+                label: 'Number of comments per page'
+                hint: 'If pagination is enabled, this is the number of comments that will appear in each block on a page with comments.'
+                tag: ShinePaginateCommentsCount
+                type: text
+                default: '10'
+            tag_for_pages_on_navbar:
+                label: 'Tag for pages on the navigation bar.'
+                hint: 'If pages are permitted on the navigation bar, pages with this tag will be the ones selected'
+                tag: ShinePageTagForNavigation
+                type: text
+                default: '@menu'
+            alternate_feed_url:
+                label: 'Alternate news feed URL'
+                hint: 'This URL will be used in place of a direct link to your Atom template. It is intended for services like FeedBurner.'
+                tag: ShineAlternateFeedURL
+                type: text
+                default: ''
+        templates:
+            index:
+                actionstreams_widgets_css:
+                    label: ActionStreams Widget CSS
+                    outfile: actionstreams_widgets.css
+                    build_type: 4
+                    rebuild_me: 1
+                atom_feed:
+                    label: Atom Feed
+                    outfile: atom.xml
+                    build_type: 4
+                    rebuild_me: 1
+                main_index:
+                    label: Main Index
+                    outfile: index.html
+                    build_type: 1
+                    rebuild_me: 1
+                mt_jquery_data:
+                    label: MT jQuery Data
+                    outfile: jquery.mt.js
+                    build_type: 4
+                    rebuild_me: 1
+                rsd:
+                    label: RSD
+                    outfile: rsd.xml
+                    build_type: 4
+                    rebuild_me: 1
+                rss:
+                    label: RSS Feed
+                    outfile: rss.xml
+                    build_type: 4
+                    rebuild_me: 1
+                comments_rss:
+                    label: RSS Feed (comments)
+                    outfile: comments_rss.xml
+                    build_type: 4
+                    rebuild_me: 1
+                sitemap:
+                    label: Sitemap
+                    outfile: sitemap.xml
+                    build_type: 4
+                    rebuild_me: 1
+            archive:
+                entry_listing:
+                    label: Entry Listing
+                    mappings:
+                        monthly:
+                            archive_type: Monthly
+                            file_template: %y/%m/%i
+                            build_type: 4
+                        category:
+                            archive_type: Category
+                            file_template: %-c/%i
+                            build_type: 4
+                        author:
+                            archive_type: Author
+                            file_type: author/%-a/%f
+                            build_type: 4
+            individual:
+                entry:
+                    label: Entries and Pages
+                    mappings:
+                        entry_archive:
+                            archive_type: Individual
+                            file_template: %y/%m/%-b/%i
+                            preferred: 1
+                        page_archive:
+                            archive_type: Page
+                            file_template: %-c/%-b/%i
+
+                feed_entry:
+                    label: Comment Feeds
+                    mappings:
+                        entry_archive:
+                            archive_type: Individual
+                            file_template: %y/%m/%-b/comments.xml
+                            preferred: 0
+                            build_type: 4
+                        page_archive:
+                            archive_type: Page
+                            file_template: %-c/%-b/comments.xml
+                            build_type: 4
+                            preferred: 0
+            module:
+                entry_details:
+                    label: Entry Details
+                footer:
+                    label: Footer
+                    cache:
+                        expire_type: 1
+                        expire_interval: 5
+                header:
+                    label: Header
+                    cache:
+                        expire_type: 1
+                        expire_interval: 5
+                html_head:
+                    label: HTML Head
+                    cache:
+                        expire_type: 1
+                        expire_interval: 30
+            system:
+                comment_response:
+                    label: Comment Response
+                dynamic_error:
+                    label: Dynamic Error
+                search_results:
+                    label: Search Results
+                popup_image:
+                    label: Popup Image
+            widget:
+                calendar:
+                    label: Calendar
+                    cache:
+                        expire_type: 1
+                        expire_interval: 360
+                category_archives:
+                    label: 'Category Archives'
+                    cache:
+                        expire_type: 2
+                        expire_event: category
+                creative_commons:
+                    label: 'Creative Commons'
+                    cache:
+                        expire_type: 1
+                        expire_interval: 60
+                monthly_archives:
+                    label: 'Monthly Archives'
+                    cache:
+                        expire_type: 1
+                        expire_interval: 360
+                openid_accepted:
+                    label: 'OpenID Accepted'
+                    cache:
+                        expire_type: 1
+                        expire_interval: 360
+                pages_listing:
+                    label: 'Page Listing'
+                    cache:
+                        expire_type: 1
+                        expire_interval: 5
+                powered_by:
+                    label: 'Powered By'
+                    cache:
+                        expire_type: 1
+                        expire_interval: 360
+                recent_comments:
+                    label: 'Recent Comments'
+                recent_posts:
+                    label: 'Recent Entries'
+                    cache:
+                        expire_type: 2
+                        expire_event: entry
+                search:
+                    label: Search
+                    cache:
+                        expire_type: 1
+                        expire_interval: 360
+                syndication:
+                    label: Syndication
+                    cache:
+                        expire_type: 1
+                        expire_interval: 360
+                tag_cloud:
+                    label: 'Tag Cloud'
+                    cache:
+                        expire_type: 1
+                        expire_interval: 60
+            widgetset:
+                primary_sidebar:
+                    order: 1000
+                    label: Primary Sidebar
+                    widgets:
+                        - Monthly Archives
+                        - Tag Cloud
+                secondary_sidebar:
+                    order: 1000
+                    label: Secondary Sidebar
+                    widgets:
+                        - Category Archives
+                        - Page Listing
+                wide_sidebar:
+                    order: 1000
+                    label: Wide Sidebar
+                    widgets:
+                        - Recent Entries
+                        - Recent Comments
+
+
+blog_preferences:
+    Shine_theme_preferences:
+        label: 'Shine Theme Preferences'
+        description: 'Preferred preferences for the Shine Blog Theme'
+        plugin_data:
+            ActionStreams:
+                rebuild_for_action_stream_events: 1
+        preferences:
+            allow_anon_comments: 1
+            allow_comment_html: 1
+            allow_commenter_regist: 1
+            allow_comments_default: 1
+            allow_pings: 1
+            allow_pings_default: 1
+            allow_reg_comments: 1
+            allow_unreg_comments: 1
+            #archive_type:
+            archive_type_preferred: entry
+            autodiscover_links: 0
+            autolink_urls: 1
+            basename_limit: 100
+            captcha_provider:
+            cc_license:
+            commenter_authenticators: MovableType
+            convert_paras: 'Markdown with Smartypants'
+            convert_paras_comments: 1
+            custom_dynamic_templates: none
+            days_on_index: 0
+            email_new_comments: 1
+            email_new_pings: 1
+            entries_on_index: 10
+            file_extension: html
+            follow_auth_links: 1
+            image_default_align: right
+            image_default_constrain: 1
+            image_default_thumb: 1
+            image_default_width: 150
+            #image_default_popup: 0
+            #image_default_wrap_text:
+            #image_default_wunits:
+            include_cache: 1
+            include_system: 0
+            internal_autodiscovery: 0
+            is_dynamic: 0
+            junk_folder_expiry: 7
+            junk_score_threshold: 0
+            #language:
+            manual_approve_commenters: 0
+            moderate_pings: 1
+            moderate_unreg_comments: 0
+            nofollow_urls: 0
+            #nwc_smart_replace:
+            #nwc_replace_field:
+            #ping_blogs:
+            #ping_google:
+            ping_others: http://rpc.pingomatic.com
+            #ping_technorati:
+            #ping_weblogs:
+            #remote_auth_token:
+            require_comment_emails: 1
+            require_typekey_emails: 0
+            #sanitize_spec:
+            #server_offset:
+            sort_order_comments: ascend
+            sort_order_posts: descend
+            status_default: 2
+            #update_pings:
+            use_comment_confirmation: 1
+            #welcome_msg:
+            words_in_excerpt: 40
+
+
